@@ -1,0 +1,5 @@
+E:\WorkSpace\code\C#\MySelfControl\FinshYuUtils\bin\Debug\FinshYuUtils.dll
+E:\WorkSpace\code\C#\MySelfControl\FinshYuUtils\bin\Debug\FinshYuUtils.pdb
+E:\WorkSpace\code\C#\MySelfControl\FinshYuUtils\obj\Debug\FinshYuUtils.dll
+E:\WorkSpace\code\C#\MySelfControl\FinshYuUtils\obj\Debug\FinshYuUtils.pdb
+E:\WorkSpace\code\C#\MySelfControl\FinshYuUtils\obj\Debug\FinshYuUtils.csprojResolveAssemblyReference.cache
