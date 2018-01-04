@@ -97,6 +97,12 @@
     <Compile Include="CommonPictureBoxs\MinPictureBoxs\SimpleMinPictureBox.Designer.cs">
       <DependentUpon>SimpleMinPictureBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommonPictureBoxs\SImplePictureBoxs\SimplePictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\SImplePictureBoxs\SimplePictureBox.Designer.cs">
+      <DependentUpon>SimplePictureBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -104,7 +110,7 @@
       <DependentUpon>SimpleMenuBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Win32Support.cs" />
-    <Compile Include="FishyuAnimateImage\AnimateImage.cs" />
+    <Compile Include="FishyuAnimateImage\AnimateWaitForm.cs" />
     <Compile Include="FishyuAnimateImage\WaitForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPictureBoxs\MinPictureBoxs\SimpleMinPictureBox.resx">
       <DependentUpon>SimpleMinPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonPictureBoxs\SImplePictureBoxs\SimplePictureBox.resx">
+      <DependentUpon>SimplePictureBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.resx">
       <DependentUpon>SimpleMenuBar.cs</DependentUpon>
@@ -207,6 +216,7 @@
     <Content Include="Resources\OriginRotation.gif" />
     <Content Include="Resources\OriginSizeRotation.gif" />
     <Content Include="Resources\Reload.gif" />
+    <Content Include="Resources\Spinner.gif" />
     <Content Include="Resources\StripLoading.gif" />
   </ItemGroup>
   <ItemGroup>

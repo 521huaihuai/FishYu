@@ -17,7 +17,7 @@ namespace FishyuSelfControl.FishyuAnimateImage
     /// <summary>   
     /// 表示一类带动画功能的图像。   
     /// </summary>   
-    public class AnimateImage
+    public class AnimateWaitForm
     {
         Image image;
         FrameDimension frameDimension;
@@ -25,16 +25,23 @@ namespace FishyuSelfControl.FishyuAnimateImage
         int mFrameCount = 1, mCurrentFrame = 0;
         public Rectangle Rect;
 
-        /// <summary>   
-        /// 动画当前帧发生改变时触发。   
-        /// </summary>   
-        public event EventHandler OnFrameChanged;
+
+        public enum GifType
+        {
+            Default,
+            Reload,
+            LongSpin,
+            OriginRotation,
+            OriginSizeRotation,
+            StripLoading
+        }
+
 
         /// <summary>   
         /// 实例化一个AnimateImage。   
         /// </summary>   
         /// <param name="img">动画图片。</param>   
-        public AnimateImage(Image img)
+        public AnimateWaitForm(Image img)
         {
             image = img;
 
@@ -96,7 +103,6 @@ namespace FishyuSelfControl.FishyuAnimateImage
         }
         #endregion
 
-        public delegate void WaitAction();
         public static void AnimatingWait(WaitAction waitAct)
         {
             AnimatingWait(waitAct, null);
@@ -104,10 +110,10 @@ namespace FishyuSelfControl.FishyuAnimateImage
 
         public static void AnimatingWait(WaitAction waitAct, Control parent)
         {
-            AnimatingWait(waitAct, parent, GifType.Default, true, "");
+            AnimatingWait(waitAct, parent, GifType.Default, false, "");
         }
 
-        public static void AnimatingWait(WaitAction waitAct, Control parent, bool isInMainThread = true)
+        public static void AnimatingWait(WaitAction waitAct, Control parent, bool isInMainThread = false)
         {
             AnimatingWait(waitAct, parent, GifType.Default, isInMainThread, "");
         }
@@ -118,7 +124,7 @@ namespace FishyuSelfControl.FishyuAnimateImage
         public static void AnimatingWait(WaitAction waitAct, Control parent, GifType type = GifType.Default, bool isInMainThread = true, string content = "")
         {
             WaitForm form = null;
-            AnimateImage animateImage = null;
+            AnimateWaitForm animateImage = null;
             bool isFinish = false;
 
             //Gif动画展示
@@ -130,6 +136,9 @@ namespace FishyuSelfControl.FishyuAnimateImage
                 switch (type)
                 {
                     case GifType.Default:
+                        _image = FishyuSelfControl.Properties.Resources.Spinner;
+                        break;
+                    case GifType.Reload:
                         _image = FishyuSelfControl.Properties.Resources.Reload;
                         break;
                     case GifType.LongSpin:
@@ -148,14 +157,14 @@ namespace FishyuSelfControl.FishyuAnimateImage
                         _image = FishyuSelfControl.Properties.Resources.Reload;
                         break;
                 }
-                animateImage = new AnimateImage(_image);
+                animateImage = new AnimateWaitForm(_image);
 
                 drawPoint = new Point((form.Width - _image.Width) / 2, (form.Height - _image.Height) / 2);
                 form.Paint += ((obj, e) =>
                 {
                     Graphics g = e.Graphics;
-                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                    g.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    g.PixelOffsetMode = PixelOffsetMode.Default; //高像素偏移质量
                     g.CompositingQuality = CompositingQuality.HighQuality;
                     //InterpolationMode不能使用High或者HighQualityBicubic,如果是灰色或者部分浅色的图像是会在边缘处出一白色透明的线
                     //用HighQualityBilinear却会使图片比其他两种模式模糊（需要肉眼仔细对比才可以看出）
@@ -175,14 +184,16 @@ namespace FishyuSelfControl.FishyuAnimateImage
                     //form.Invalidate();
                 });
 
-                lock (new object())
+                //lock (_obj)
+                //{
+
+                //}
+                if (form != null && !form.IsDisposed && !isFinish)
                 {
-                    if (form != null && !form.IsDisposed && !isFinish)
-                    {
-                        animateImage.Play();
-                        form.Focus();
-                        form.ShowDialog();
-                    }
+                    animateImage.Play();
+                    form.Focus();
+                    form.ShowDialog();
+                    //isOnShow = true;
                 }
             });
             drawThread.IsBackground = true;
@@ -193,21 +204,23 @@ namespace FishyuSelfControl.FishyuAnimateImage
             if (isInMainThread)
             {
                 waitAct();
-                CloseForm(animateImage, form, ref isFinish);
+                isFinish = true;
+                CloseForm(animateImage, form);
             }
             else
             {
                 Thread thread = new Thread(() =>
                 {
                     waitAct();
-                    CloseForm(animateImage, form, ref isFinish);
+                    isFinish = true;
+                    CloseForm(animateImage, form);
                 });
                 thread.IsBackground = true;
                 thread.Start();
             }
         }
 
-        private static void CloseForm(AnimateImage animateImage, Form form, ref bool isFinish)
+        private static void CloseForm(AnimateWaitForm animateImage, Form form)
         {
             //停止动画
             if (animateImage != null)
@@ -217,23 +230,37 @@ namespace FishyuSelfControl.FishyuAnimateImage
             lock (new object())
             {
                 //关闭窗体
-                if (form != null && form.Created && form.IsHandleCreated && !form.IsDisposed)
+                //if (form != null && form.Created && form.IsHandleCreated && !form.IsDisposed)
+                if (form != null)
                 {
                     try
                     {
                         form.Invoke((EventHandler)delegate
                         {
                             form.Close();
+                            //form.Dispose();
                         });
                     }
                     catch (Exception)
                     {
                     }
                 }
-                isFinish = true;
             }
         }
 
+
+        private void FrameChanged(object sender, EventArgs e)
+        {
+            mCurrentFrame = mCurrentFrame + 1 >= mFrameCount ? 0 : mCurrentFrame + 1;
+            lock (image)
+            {
+                image.SelectActiveFrame(frameDimension, mCurrentFrame);
+            }
+            if (OnFrameChanged != null)
+            {
+                OnFrameChanged(image, e);
+            }
+        }
 
         /// <summary>   
         /// 图片。   
@@ -259,28 +286,14 @@ namespace FishyuSelfControl.FishyuAnimateImage
             get { return mCurrentFrame; }
         }
 
-        private void FrameChanged(object sender, EventArgs e)
-        {
-            mCurrentFrame = mCurrentFrame + 1 >= mFrameCount ? 0 : mCurrentFrame + 1;
-            lock (image)
-            {
-                image.SelectActiveFrame(frameDimension, mCurrentFrame);
-            }
-            if (OnFrameChanged != null)
-            {
-                OnFrameChanged(image, e);
-            }
-        }
 
         public Point Location { get; set; }
 
-        public enum GifType
-        {
-            Default,
-            LongSpin,
-            OriginRotation,
-            OriginSizeRotation,
-            StripLoading
-        }
+        public delegate void WaitAction();
+
+        /// <summary>   
+        /// 动画当前帧发生改变时触发。   
+        /// </summary>   
+        public event EventHandler OnFrameChanged;
     }
 }
