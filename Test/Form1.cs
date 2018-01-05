@@ -40,8 +40,10 @@ namespace Test
 
         private void simplePictureBox2_OnPictrueBoxClickListenerEvent()
         {
-            Form form = new Form();
-            form.ShowDialog();
+            AnimateWaitForm.AnimatingWait(() =>
+            {
+                Thread.Sleep(3000);
+            }, this, true);
         }
     }
 }

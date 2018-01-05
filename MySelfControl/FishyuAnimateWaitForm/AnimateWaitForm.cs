@@ -19,9 +19,9 @@ namespace FishyuSelfControl.FishyuAnimateImage
     /// </summary>   
     public class AnimateWaitForm
     {
-        Image image;
-        FrameDimension frameDimension;
-        bool mCanAnimate;
+        Image image = null;
+        FrameDimension frameDimension = null;
+        bool mCanAnimate = false;
         int mFrameCount = 1, mCurrentFrame = 0;
         public Rectangle Rect;
 
@@ -65,10 +65,11 @@ namespace FishyuSelfControl.FishyuAnimateImage
         {
             if (mCanAnimate)
             {
-                lock (image)
-                {
-                    ImageAnimator.Animate(image, new EventHandler(FrameChanged));
-                }
+                //lock (image)
+                //{
+
+                //}
+                ImageAnimator.Animate(image, new EventHandler(FrameChanged));
             }
         }
 
@@ -79,10 +80,11 @@ namespace FishyuSelfControl.FishyuAnimateImage
         {
             if (mCanAnimate)
             {
-                lock (image)
-                {
-                    ImageAnimator.StopAnimate(image, new EventHandler(FrameChanged));
-                }
+                //lock (image)
+                //{
+                //    ImageAnimator.StopAnimate(image, new EventHandler(FrameChanged));
+                //}
+                ImageAnimator.StopAnimate(image, new EventHandler(FrameChanged));
             }
         }
 
@@ -94,11 +96,13 @@ namespace FishyuSelfControl.FishyuAnimateImage
             if (mCanAnimate)
             {
                 ImageAnimator.StopAnimate(image, new EventHandler(FrameChanged));
-                lock (image)
-                {
-                    image.SelectActiveFrame(frameDimension, 0);
-                    mCurrentFrame = 0;
-                }
+                //lock (image)
+                //{
+                //    image.SelectActiveFrame(frameDimension, 0);
+                //    mCurrentFrame = 0;
+                //}
+                image.SelectActiveFrame(frameDimension, 0);
+                mCurrentFrame = 0;
             }
         }
         #endregion
@@ -170,10 +174,23 @@ namespace FishyuSelfControl.FishyuAnimateImage
                     //用HighQualityBilinear却会使图片比其他两种模式模糊（需要肉眼仔细对比才可以看出）
                     g.InterpolationMode = InterpolationMode.Default;
                     g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-                    lock (animateImage.Image)
+                    //lock (animateImage.image)
+                    //{
+                    //    try
+                    //    {
+                    //        g.DrawImage(animateImage.Image, drawPoint);
+                    //    }
+                    //    catch (Exception)
+                    //    {
+                    //    }
+                    //    //g.DrawString()
+                    //}
+                    try
                     {
                         g.DrawImage(animateImage.Image, drawPoint);
-                        //g.DrawString()
+                    }
+                    catch (Exception)
+                    {
                     }
                 });
                 animateImage.Location = form.Location;
@@ -223,9 +240,13 @@ namespace FishyuSelfControl.FishyuAnimateImage
         private static void CloseForm(AnimateWaitForm animateImage, Form form)
         {
             //停止动画
-            if (animateImage != null)
+            lock (animateImage.image)
             {
-                animateImage.Stop();
+                if (animateImage != null)
+                {
+                    animateImage.Stop();
+                    animateImage.DisposeImage();
+                }
             }
             lock (new object())
             {
@@ -238,7 +259,7 @@ namespace FishyuSelfControl.FishyuAnimateImage
                         form.Invoke((EventHandler)delegate
                         {
                             form.Close();
-                            //form.Dispose();
+                            form.Dispose();
                         });
                     }
                     catch (Exception)
@@ -248,14 +269,22 @@ namespace FishyuSelfControl.FishyuAnimateImage
             }
         }
 
+        private void DisposeImage()
+        {
+            if (image != null)
+            {
+                image.Dispose();
+            }
+        }
 
         private void FrameChanged(object sender, EventArgs e)
         {
             mCurrentFrame = mCurrentFrame + 1 >= mFrameCount ? 0 : mCurrentFrame + 1;
-            lock (image)
-            {
-                image.SelectActiveFrame(frameDimension, mCurrentFrame);
-            }
+            //lock (image)
+            //{
+            //    image.SelectActiveFrame(frameDimension, mCurrentFrame);
+            //}
+            image.SelectActiveFrame(frameDimension, mCurrentFrame);
             if (OnFrameChanged != null)
             {
                 OnFrameChanged(image, e);
