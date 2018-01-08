@@ -280,11 +280,10 @@ namespace FishyuSelfControl.FishyuAnimateImage
         private void FrameChanged(object sender, EventArgs e)
         {
             mCurrentFrame = mCurrentFrame + 1 >= mFrameCount ? 0 : mCurrentFrame + 1;
-            //lock (image)
-            //{
-            //    image.SelectActiveFrame(frameDimension, mCurrentFrame);
-            //}
-            image.SelectActiveFrame(frameDimension, mCurrentFrame);
+            lock (image)
+            {
+                image.SelectActiveFrame(frameDimension, mCurrentFrame);
+            }
             if (OnFrameChanged != null)
             {
                 OnFrameChanged(image, e);

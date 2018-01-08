@@ -103,6 +103,13 @@
     <Compile Include="CommonPictureBoxs\SImplePictureBoxs\SimplePictureBox.Designer.cs">
       <DependentUpon>SimplePictureBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="FishyuAnimateWaitForm\AnimateWaitForm.cs" />
+    <Compile Include="FishyuAnimateWaitForm\WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FishyuAnimateWaitForm\WaitForm.Designer.cs">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,13 +117,6 @@
       <DependentUpon>SimpleMenuBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Win32Support.cs" />
-    <Compile Include="FishyuAnimateImage\AnimateWaitForm.cs" />
-    <Compile Include="FishyuAnimateImage\WaitForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FishyuAnimateImage\WaitForm.Designer.cs">
-      <DependentUpon>WaitForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="FishyuControls\MultiTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -148,6 +148,9 @@
     <EmbeddedResource Include="CommonPictureBoxs\SImplePictureBoxs\SimplePictureBox.resx">
       <DependentUpon>SimplePictureBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FishyuAnimateWaitForm\WaitForm.resx">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.resx">
       <DependentUpon>SimpleMenuBar.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,9 +164,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="FishyuAnimateImage\WaitForm.resx">
-      <DependentUpon>WaitForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
