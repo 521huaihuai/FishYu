@@ -188,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CommonListBoxs\" />
+    <Folder Include="FishYuProgressBars\" />
     <Folder Include="Resources\Img_128\" />
     <Folder Include="Resources\Img_16\" />
     <Folder Include="Resources\Img_48\" />
