@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{142F6A74-B1D1-4CFF-8805-E9F2FAC9D440}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FishyuSelfControl</RootNamespace>
+    <AssemblyName>FishyuSelfControl</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonDataGridViews\CommonDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonDataGridViews\CommonDataGridViewInterface.cs" />
+    <Compile Include="CommonDataGridViews\RowMergeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonDataGridViews\RowMergeView.designer.cs">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\ClosePictureBoxs\AnimationClosePictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\ClosePictureBoxs\AnimationClosePictureBox.Designer.cs">
+      <DependentUpon>AnimationClosePictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\ClosePictureBoxs\SimpleClosePictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\ClosePictureBoxs\SimpleClosePictureBox.Designer.cs">
+      <DependentUpon>SimpleClosePictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\MaxPictureBoxs\AnimationMaxPictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\MaxPictureBoxs\AnimationMaxPictureBox.Designer.cs">
+      <DependentUpon>AnimationMaxPictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\MaxPictureBoxs\SimpleMaxPictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\MaxPictureBoxs\SimpleMaxPictureBox.Designer.cs">
+      <DependentUpon>SimpleMaxPictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\MinPictureBoxs\AnimationMinPictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\MinPictureBoxs\AnimationMinPictureBox.Designer.cs">
+      <DependentUpon>AnimationMinPictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\MinPictureBoxs\SimpleMinPictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\MinPictureBoxs\SimpleMinPictureBox.Designer.cs">
+      <DependentUpon>SimpleMinPictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\SImplePictureBoxs\SimplePictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\SImplePictureBoxs\SimplePictureBox.Designer.cs">
+      <DependentUpon>SimplePictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.Designer.cs">
+      <DependentUpon>SimpleMenuBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win32Support.cs" />
+    <Compile Include="FishyuAnimateImage\AnimateWaitForm.cs" />
+    <Compile Include="FishyuAnimateImage\WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FishyuAnimateImage\WaitForm.Designer.cs">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FishyuControls\MultiTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CommonDataGridViews\CommonDataGridView.resx">
+      <DependentUpon>CommonDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonDataGridViews\RowMergeView.resx">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonPictureBoxs\ClosePictureBoxs\AnimationClosePictureBox.resx">
+      <DependentUpon>AnimationClosePictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonPictureBoxs\ClosePictureBoxs\SimpleClosePictureBox.resx">
+      <DependentUpon>SimpleClosePictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonPictureBoxs\MaxPictureBoxs\AnimationMaxPictureBox.resx">
+      <DependentUpon>AnimationMaxPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonPictureBoxs\MaxPictureBoxs\SimpleMaxPictureBox.resx">
+      <DependentUpon>SimpleMaxPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonPictureBoxs\MinPictureBoxs\AnimationMinPictureBox.resx">
+      <DependentUpon>AnimationMinPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonPictureBoxs\MinPictureBoxs\SimpleMinPictureBox.resx">
+      <DependentUpon>SimpleMinPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonPictureBoxs\SImplePictureBoxs\SimplePictureBox.resx">
+      <DependentUpon>SimplePictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.resx">
+      <DependentUpon>SimpleMenuBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="FishyuAnimateImage\WaitForm.resx">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CommonListBoxs\" />
+    <Folder Include="Resources\Img_128\" />
+    <Folder Include="Resources\Img_16\" />
+    <Folder Include="Resources\Img_48\" />
+    <Folder Include="Resources\Img_64\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Img_32\close_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Img_32\close_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Img_32\close_red.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Img_32\max_black_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Img_32\max_red_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Img_32\max_white_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Img_32\min_black_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Img_32\min_red_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Img_32\min_white_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LongSpin.gif" />
+    <Content Include="Resources\OriginRotation.gif" />
+    <Content Include="Resources\OriginSizeRotation.gif" />
+    <Content Include="Resources\Reload.gif" />
+    <Content Include="Resources\Spinner.gif" />
+    <Content Include="Resources\StripLoading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FishyuAnimation\FishyuAnimation\FishyuAnimation.csproj">
+      <Project>{13d92134-fcae-4b91-85ba-4e7766f842c6}</Project>
+      <Name>FishyuAnimation</Name>
+    </ProjectReference>
+    <ProjectReference Include="FinshYuUtils\FinshYuUtils.csproj">
+      <Project>{dc97b04d-3461-4227-9c8b-842e8a48f66a}</Project>
+      <Name>FinshYuUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

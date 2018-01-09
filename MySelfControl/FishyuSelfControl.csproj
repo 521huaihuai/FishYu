@@ -116,6 +116,12 @@
     <Compile Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.Designer.cs">
       <DependentUpon>SimpleMenuBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="SimpleMessageBoxs\SimpleMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimpleMessageBoxs\SimpleMessageBox.Designer.cs">
+      <DependentUpon>SimpleMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Win32Support.cs" />
     <Compile Include="FishyuControls\MultiTextBox.cs">
       <SubType>Component</SubType>
@@ -164,6 +170,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SimpleMessageBoxs\SimpleMessageBox.resx">
+      <DependentUpon>SimpleMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

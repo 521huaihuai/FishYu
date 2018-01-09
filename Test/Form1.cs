@@ -1,4 +1,5 @@
 ﻿using FishyuSelfControl.FishyuAnimateImage;
+using FishyuSelfControl.SimpleMessageBoxs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,6 +45,11 @@ namespace Test
             {
                 Thread.Sleep(3000);
             }, this, true);
+        }
+
+        private void simplePictureBox3_OnPictrueBoxClickListenerEvent()
+        {
+            SimpleMessageBox.ShowMessageBox("这是智能指示");
         }
     }
 }
