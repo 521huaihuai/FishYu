@@ -240,13 +240,24 @@ namespace FishyuSelfControl.FishyuAnimateImage
         private static void CloseForm(AnimateWaitForm animateImage, Form form)
         {
             //停止动画
-            lock (animateImage.image)
+            //lock (animateImage.image)
+            //{
+            //    if (animateImage != null)
+            //    {
+            //        animateImage.Stop();
+            //        animateImage.DisposeImage();
+            //    }
+            //}
+            try
             {
                 if (animateImage != null)
                 {
                     animateImage.Stop();
                     animateImage.DisposeImage();
                 }
+            }
+            catch (Exception)
+            {
             }
             lock (new object())
             {
