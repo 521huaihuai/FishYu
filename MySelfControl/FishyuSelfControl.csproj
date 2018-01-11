@@ -43,6 +43,21 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>FinshYuUtils\DLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FinshYuUtils\DLL\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FinshYuUtils\DLL\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FinshYuUtils\DLL\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -55,6 +70,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CommonDataGridViews\CommonDataGridViewInterface.cs" />
+    <Compile Include="CommonDataGridViews\ExcelFactory.cs" />
     <Compile Include="CommonDataGridViews\RowMergeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -188,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CommonListBoxs\" />
+    <Folder Include="DLL\" />
     <Folder Include="FishYuProgressBars\" />
     <Folder Include="Resources\Img_128\" />
     <Folder Include="Resources\Img_16\" />

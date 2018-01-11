@@ -13,30 +13,22 @@ namespace FishyuSelfControl.FishyuAnimateImage
     public partial class WaitForm : Form
     {
         private Form form;
+        private Control control;
         //IntPtr hDesktop;
         public const int GW_CHILD = 5;
 
         public WaitForm(Control parent, bool isInMainThread)
         {
             InitializeComponent();
-            //isMouseDown = false;
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint, true);
+           
             FormBorderStyle = FormBorderStyle.None;
             BackColor = Color.White;
-            ShowInTaskbar = false;
             TransparencyKey = Color.White;
+
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
-            if (parent != null)
-            {
-                Location = parent.Location;
-                CalculateParentLocation(parent);
-                Size = parent.Size;
-            }
-            else
-            {
-                Height = Screen.PrimaryScreen.Bounds.Height;
-                Width = Screen.PrimaryScreen.Bounds.Width;
-            }
+            control = parent;
             TopMost = true;
             SetTopLevel(true);
             if (isInMainThread)
@@ -62,6 +54,42 @@ namespace FishyuSelfControl.FishyuAnimateImage
             }
             //hDesktop = GetDesktopHandle(DesktopLayer.Progman);
             //EmbedDesktop(this, this.Handle, this.hDesktop);
+        }
+
+        private void WaitForm_Load(object sender, EventArgs e)
+        {
+            if (control != null)
+            {
+                control.LocationChanged += control_LocationChanged;
+                Location = new Point(control.Location.X + (control.Width - Width) / 2, control.Location.Y + (control.Height - Height) / 2);
+                CalculateParentLocation(control);
+                //StartPosition = FormStartPosition.CenterParent;
+                //Size = parent.Size;
+            }
+            else
+            {
+                //StartPosition = FormStartPosition.CenterScreen;
+                Location = new Point((Screen.PrimaryScreen.Bounds.Width - Width) / 2, (Screen.PrimaryScreen.Bounds.Height - Height) / 2);
+                //Height = Screen.PrimaryScreen.Bounds.Height;
+                //Width = Screen.PrimaryScreen.Bounds.Width;
+            }
+        }
+
+        void control_LocationChanged(object sender, EventArgs e)
+        {
+            Control ss = sender as Control;
+            try
+            {
+                this.Invoke((EventHandler)delegate
+                {
+                    Location = new Point(ss.Location.X + (ss.Width - Width) / 2, ss.Location.Y + (ss.Height - Height) / 2);
+                    SetTopLevel(true);
+                    TopMost = true;
+                });
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void CalculateParentLocation(Control parent)

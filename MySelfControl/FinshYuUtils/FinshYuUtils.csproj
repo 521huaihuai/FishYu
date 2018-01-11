@@ -30,6 +30,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -41,9 +57,21 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DrawUtils\DrawUtil.cs" />
+    <Compile Include="ExcelUtils\ExcelFactory.cs" />
+    <Compile Include="ExcelUtils\ExcelHelper.cs" />
+    <Compile Include="ExcelUtils\ReNameRepeatFileName.cs" />
     <Compile Include="ImageUtils\StaticImageLoad.cs" />
+    <Compile Include="JumpViewUtils\IJumpViewInterface.cs" />
+    <Compile Include="LogBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemUtil.cs" />
     <Compile Include="TimeUtils\TimeUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\log4net.dll" />
+    <Content Include="DLL\NPOI.dll" />
+    <Content Include="DLL\NPOI.OOXML.dll" />
+    <Content Include="DLL\NPOI.OpenXml4Net.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

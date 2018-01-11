@@ -46,6 +46,7 @@ namespace FishyuSelfControl.CommonPictureBoxs.ClosePictureBoxs
         /// <summary>
         /// 是否启用检测填充展示
         /// </summary>
+        [Description("划过启用特效"), Browsable(true), Category("效果")]
         public bool IsIntelligence { get; set; }
 
         public AnimationClosePictureBox()

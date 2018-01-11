@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FishyuAnimation.Animations
 {
