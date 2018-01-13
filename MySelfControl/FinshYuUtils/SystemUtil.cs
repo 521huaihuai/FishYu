@@ -17,6 +17,9 @@ namespace FinshYuUtils
 
 
         private static string _systemVerionName;
+        /// <summary>
+        /// 系统版本
+        /// </summary>
         public static string SystemVerionName { get { return _systemVerionName; } }
 
         static SystemUtil()
@@ -55,6 +58,15 @@ namespace FinshYuUtils
         private static void setOSystemName(string p)
         {
             _systemVerionName = p;
+        }
+
+        /// <summary>
+        /// 生成随机数
+        /// </summary>
+        public static Random CreateRandom()
+        {
+            Random rd = new Random(Guid.NewGuid().GetHashCode());
+            return rd;
         }
 
     }

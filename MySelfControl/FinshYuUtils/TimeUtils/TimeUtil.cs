@@ -1,4 +1,4 @@
-﻿#region Version Info 
+﻿#region Version Info
 /* ======================================================================== 
 * 本类功能概述:时间帮助类
 * 
@@ -45,7 +45,7 @@ namespace FinshYuUtils.TimeUtils
             if (timeStamp.HasValue)
             {
                 DateTime dateStart = new DateTime(1970, 1, 1, 8, 0, 0);
-                TimeSpan toNow = new TimeSpan(timeStamp.Value * 10000000);
+                TimeSpan toNow = new TimeSpan(timeStamp.Value * 10000);
                 DateTime targetDt = dateStart.Add(toNow);
                 return targetDt;
             }
@@ -74,6 +74,18 @@ namespace FinshYuUtils.TimeUtils
                 return targetDt;
             }
             return DateTime.MinValue;
+        }
+
+        public static DateTime GetTodayStartTime()
+        {
+            string time = DateTime.Now.ToString("yyyy-MM-dd");
+            return Convert.ToDateTime(time + " 00:00:00");
+        }
+
+        public static DateTime GetTodayEndTime()
+        {
+            string time = DateTime.Now.ToString("yyyy-MM-dd");
+            return Convert.ToDateTime(time + " 23:59:59");
         }
     }
 }

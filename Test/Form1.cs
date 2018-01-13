@@ -51,5 +51,10 @@ namespace Test
         {
             SimpleMessageBox.ShowMessageBox("这是智能指示");
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

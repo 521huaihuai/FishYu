@@ -132,6 +132,30 @@
     <Compile Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.Designer.cs">
       <DependentUpon>SimpleMenuBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="FishYuReportView\AbstractReportView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FishYuReportView\AbstractReportView.Designer.cs">
+      <DependentUpon>AbstractReportView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\Cell.cs" />
+    <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\Column.cs" />
+    <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\FishYuCellStyle.cs" />
+    <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\FishYuDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\FishYuDataGridView.Designer.cs">
+      <DependentUpon>FishYuDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\ICellSelfDefineView.cs" />
+    <Compile Include="FishYuReportView\CommonView\LegendView\SimpleLegendView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FishYuReportView\CommonView\LegendView\SimpleLegendView.Designer.cs">
+      <DependentUpon>SimpleLegendView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FishYuReportView\IView.cs" />
+    <Compile Include="FishYuReportView\ToolTips\IToolTips.cs" />
     <Compile Include="SimpleMessageBoxs\SimpleMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +200,12 @@
     <EmbeddedResource Include="FishYuMultipleMenuBars\SimpleMenuBars\SimpleMenuBar.resx">
       <DependentUpon>SimpleMenuBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FishYuReportView\AbstractReportView.resx">
+      <DependentUpon>AbstractReportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FishYuReportView\CommonView\LegendView\SimpleLegendView.resx">
+      <DependentUpon>SimpleLegendView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -206,6 +236,9 @@
     <Folder Include="CommonListBoxs\" />
     <Folder Include="DLL\" />
     <Folder Include="FishYuProgressBars\" />
+    <Folder Include="FishYuReportView\CommonReportView\" />
+    <Folder Include="FishYuReportView\CoordinateReportView\" />
+    <Folder Include="FishYuReportView\SingleReportView\" />
     <Folder Include="Resources\Img_128\" />
     <Folder Include="Resources\Img_16\" />
     <Folder Include="Resources\Img_48\" />

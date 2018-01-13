@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace FishyuAnimation.Animations
 {
-    public abstract class Animation
+    public abstract class Animation : IDisposable
     {
         public IAnimation iAnimalionInterface;
         public IInterpolation iInterpolation;
@@ -23,9 +23,9 @@ namespace FishyuAnimation.Animations
         /// </summary>
         public enum AnimationStates
         {
+            AnimationStop,
             AnimationStart,
             AnimationRuning,
-            AnimationStop,
             AnimationPause
         }
         #endregion
@@ -173,6 +173,11 @@ namespace FishyuAnimation.Animations
         public void RecoveryAnimation()
         {
             AnimationState = AnimationStates.AnimationRuning;
+        }
+
+        public void Dispose()
+        {
+            AnimationState = AnimationStates.AnimationStop;
         }
 
         /// <summary>
