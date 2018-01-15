@@ -147,6 +147,7 @@ namespace FishyuSelfControl.FishYuReportView
             // 如果是设计器模式进行普通绘制以便设计展示
             if (isDesignMode)
             {
+                g.FillRectangle(Brushes.Silver, new Rectangle(0, 0, Width, Height));
                 if (_iView != null)
                 {
                     // 进行正常绘制

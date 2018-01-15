@@ -1,0 +1,12 @@
+﻿[Localizable(true)]
+[RefreshProperties(RefreshProperties.Repaint)]
+
+
+[EditorBrowsable(EditorBrowsableState.Always)]
+
+
+[MergableProperty(false)]
+[Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+[DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Visible)]
+[Localizable(true)]
+[Description("设置或获取合并列的集合"), Browsable(true), Category("单元格合

@@ -12,6 +12,7 @@
 */
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
@@ -54,6 +55,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             set
             {
                 _cellType = value;
+                DrawCell.Type = _cellType;
                 if (Cells != null)
                 {
                     if (IsBottomColumn())
@@ -67,6 +69,8 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             }
         }
 
+        public Cell DrawCell = new Cell();
+
         protected FishYuCellStyle _cellStyle;
         /// <summary>
         /// 设置单元格样式,如果Column有ChildColumn 由ChildColumn决定
@@ -78,7 +82,8 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             set
             {
                 _cellStyle = value;
-                if (Cells != null)
+                DrawCell.CellStyle = _cellStyle;
+                if (Cells != null && IsCellStyleEnableColumnCellStyle)
                 {
                     if (IsBottomColumn())
                     {
@@ -107,6 +112,8 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             set
             {
                 _width = value;
+                DrawCell.Width = _width;
+                DrawCell.Rectangle.Width = _width;
                 if (Cells != null)
                 {
                     if (IsBottomColumn())
@@ -127,6 +134,8 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             set
             {
                 _height = value;
+                DrawCell.Height = _height;
+                DrawCell.Rectangle.Height = _height;
                 if (Cells != null)
                 {
                     if (IsBottomColumn())
@@ -140,11 +149,30 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             }
         }
 
+        protected int _x;
+        protected int _y;
+
+        public int X
+        {
+            get { return _x; }
+            set { _x = value; DrawCell.Location.X = _x; }
+        }
+
+        public int Y
+        {
+            get { return _y; }
+            set { _y = value; DrawCell.Location.Y = _y; }
+        }
+
+
+
         public string Name { get; set; }
-        // Columns中相对排列第几个
-        public int ColumnIndex;
-        // 总的Column排列第几个
+        // 父ColumnIndex
+        public int PColumnIndex;
+        // Column排列第几个
         public int Index;
+        public int RowIndex;
+        public int PRowIndex = 0;
 
         protected List<Cell> _cells;
         /// <summary>
@@ -173,6 +201,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         /// <summary>
         /// 设置列是否可见(影响该列下的所有列和单元格)
         /// </summary>
+        [Description("设置列是否可见(影响该列下的所有列和单元格)"), Browsable(true), Category("样式")]
         public bool IsVisible
         {
             get { return isVisible; }
@@ -219,7 +248,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             {
                 if (Cells != null)
                 {
-
+                    // 改变, 感觉需要静态委托对每个Column进行改变大小
                 }
             }
         }
@@ -230,5 +259,11 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         /// 底层Column为空
         /// </summary>
         public List<Column> ChildColumns { get; set; }
+
+        /// <summary>
+        /// 是否该列下的单元格默认启用该列的样式
+        /// </summary>
+        [Description("是否该列下的单元格默认启用该列的样式"), Browsable(true), Category("样式")]
+        public bool IsCellStyleEnableColumnCellStyle { get; private set; }
     }
 }

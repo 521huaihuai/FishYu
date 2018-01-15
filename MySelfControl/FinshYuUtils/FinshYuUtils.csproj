@@ -56,6 +56,7 @@
     <Compile Include="CommonUtils\DesignModeUtil.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ConverterUtils\AbstractConverter.cs" />
     <Compile Include="DrawUtils\DrawUtil.cs" />
     <Compile Include="ExcelUtils\ExcelFactory.cs" />
     <Compile Include="ExcelUtils\ExcelHelper.cs" />
@@ -72,6 +73,7 @@
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
     <Content Include="DLL\NPOI.OpenXml4Net.dll" />
+    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

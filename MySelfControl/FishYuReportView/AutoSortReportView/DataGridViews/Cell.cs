@@ -26,6 +26,11 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
     public class Cell
     {
 
+        public Cell()
+        {
+            Rectangle.Location = Location;
+        }
+
         public Cell(Rectangle rectangle, object tag = null)
         {
             Location = rectangle.Location;
@@ -66,8 +71,8 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
 
         public int Width { get; set; }
         public int Height { get; set; }
-        public Point Location { get; set; }
-        public Rectangle Rectangle { get; set; }
+        public Point Location = new Point();
+        public Rectangle Rectangle = new Rectangle();
 
         /// <summary>
         /// 是否可见(合并单元格时被设置不可见)
@@ -133,62 +138,57 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             {
                 return;
             }
+            if (cell.CellStyle == null)
+            {
+                cell.CellStyle = FishYuCellStyle.DefaultCellStyle;
+            }
             // 如果是可见的或者未被合并单元格的
             if (cell.IsVisible)
             {
                 switch (cell.Type)
                 {
                     case CellType.Text:
-                        if (cell.CellStyle != null)
+                        switch (cell.CellStyle.Alignment)
                         {
-                            switch (cell.CellStyle.Alignment)
-                            {
-                                case Alignment.MiddleCenter:
-                                    DrawText(graphics, cell, LocationModel.Location_Center);
-                                    break;
-                                case Alignment.MiddleLeft:
-                                    DrawText(graphics, cell, LocationModel.Location_Left);
-                                    break;
-                                case Alignment.MiddleRight:
-                                    DrawText(graphics, cell,
-                                        LocationModel.Location_Right);
-                                    break;
-                                default:
-                                    DrawText(graphics, cell, LocationModel.Location_Center);
-                                    break;
-                            }
+                            case Alignment.MiddleCenter:
+                                DrawText(graphics, cell, LocationModel.Location_Center);
+                                break;
+                            case Alignment.MiddleLeft:
+                                DrawText(graphics, cell, LocationModel.Location_Left);
+                                break;
+                            case Alignment.MiddleRight:
+                                DrawText(graphics, cell,
+                                    LocationModel.Location_Right);
+                                break;
+                            default:
+                                DrawText(graphics, cell, LocationModel.Location_Center);
+                                break;
                         }
                         break;
                     case CellType.Image:
-                        if (cell.CellStyle != null)
+                        switch (cell.CellStyle.Alignment)
                         {
-                            switch (cell.CellStyle.Alignment)
-                            {
-                                case Alignment.MiddleCenter:
-                                    break;
-                                case Alignment.MiddleLeft:
-                                    break;
-                                case Alignment.MiddleRight:
-                                    break;
-                                default:
-                                    break;
-                            }
+                            case Alignment.MiddleCenter:
+                                break;
+                            case Alignment.MiddleLeft:
+                                break;
+                            case Alignment.MiddleRight:
+                                break;
+                            default:
+                                break;
                         }
                         break;
                     case CellType.CheckBox:
-                        if (cell.CellStyle != null)
+                        switch (cell.CellStyle.Alignment)
                         {
-                            switch (cell.CellStyle.Alignment)
-                            {
-                                case Alignment.MiddleCenter:
-                                    break;
-                                case Alignment.MiddleLeft:
-                                    break;
-                                case Alignment.MiddleRight:
-                                    break;
-                                default:
-                                    break;
-                            }
+                            case Alignment.MiddleCenter:
+                                break;
+                            case Alignment.MiddleLeft:
+                                break;
+                            case Alignment.MiddleRight:
+                                break;
+                            default:
+                                break;
                         }
                         break;
                     case CellType.SelfDefine:

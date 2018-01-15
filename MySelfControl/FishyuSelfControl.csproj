@@ -140,6 +140,8 @@
     </Compile>
     <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\Cell.cs" />
     <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\Column.cs" />
+    <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\ColumnFactory.cs" />
+    <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\Converters\CellStyleConverter.cs" />
     <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\FishYuCellStyle.cs" />
     <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\FishYuDataGridView.cs">
       <SubType>UserControl</SubType>
@@ -202,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FishYuReportView\AbstractReportView.resx">
       <DependentUpon>AbstractReportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FishYuReportView\AutoSortReportView\DataGridViews\FishYuDataGridView.resx">
+      <DependentUpon>FishYuDataGridView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FishYuReportView\CommonView\LegendView\SimpleLegendView.resx">
       <DependentUpon>SimpleLegendView.cs</DependentUpon>
