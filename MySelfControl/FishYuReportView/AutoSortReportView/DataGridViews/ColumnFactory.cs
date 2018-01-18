@@ -12,6 +12,7 @@
 */
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
@@ -96,15 +97,18 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                     }
                     if (!allDict.ContainsKey(item.PRowIndex))
                     {
+                        Column column = new Column();
                         Dictionary<int, Column> dictionary = new Dictionary<int, Column>();
-                        dictionary.Add(item.PColumnIndex, item);
+                        dictionary.Add(item.PColumnIndex, column);
                         allDict.Add(item.PRowIndex, dictionary);
+                        allDict[item.PRowIndex][item.PColumnIndex].ChildColumns = new List<Column>();
+                        allDict[item.PRowIndex][item.PColumnIndex].ChildColumns.Add(item);
                     }
                     else
                     {
                         if (allDict[item.PRowIndex].ContainsKey(item.PColumnIndex))
                         {
-                            allDict[item.PRowIndex][item.PColumnIndex].ChildColumns.Add(item);
+                            allDict[item.PRowIndex][item.PColumnIndex].AddColumn(item);
                         }
                         else
                         {
@@ -117,13 +121,25 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
 
                 if (allDict[minRowIndex].Values.Count > 0)
                 {
-                    for (int i = 0; i < allDict[0].Keys.Count; i++)
-                    {
-                        list.Add(allDict[minRowIndex][i]);
-                    }
+                    ResizeColumn(allDict[minRowIndex][0], new Point(0, 0));
+                    return allDict[minRowIndex][0].ChildColumns;
                 }
             }
             return list;
+        }
+
+        private void ResizeColumn(Column column, Point point)
+        {
+            if (column != null && column.ChildColumns != null)
+            {
+                foreach (var item in column.ChildColumns)
+                {
+                    item.X = point.X;
+                    item.Y = point.Y;
+                    ResizeColumn(item, new Point(item.X, item.Height + point.Y));
+                    point.X = item.X + item.Width;
+                }
+            }
         }
     }
 }

@@ -131,6 +131,7 @@ namespace FishyuSelfControl.FishYuReportView
             _lineBrush = new SolidBrush(_brushColor);
         }
 
+        // 不允许初始化对象以及耗时操作
         protected override void OnPaint(PaintEventArgs e)
         {
             DateTime currentTime = DateTime.Now;
@@ -138,8 +139,8 @@ namespace FishyuSelfControl.FishYuReportView
             // 自己声明的Graphics
             Graphics g = e.Graphics;
             // 绘制的质量设置
-            g.CompositingQuality = CompositingQuality.HighQuality;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.CompositingQuality = CompositingQuality.Default;
+            //g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             g.SmoothingMode = SmoothingMode.HighQuality;
 
@@ -150,7 +151,7 @@ namespace FishyuSelfControl.FishYuReportView
                 g.FillRectangle(Brushes.Silver, new Rectangle(0, 0, Width, Height));
                 if (_iView != null)
                 {
-                    // 进行正常绘制
+                    // 进行正常绘制(// 不允许初始化对象以及耗时操作)
                     _iView.ChildPaint(g, _linePen, _lineBrush);
                 }
             }

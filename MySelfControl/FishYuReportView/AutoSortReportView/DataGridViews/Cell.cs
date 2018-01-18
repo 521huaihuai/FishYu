@@ -105,6 +105,8 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         /// </summary>
         public List<Cell> AllRoundCells { get { return _roundCellList; } set { _roundCellList = value; } }
 
+        public Color GridColor;
+
 
         /// <summary>
         /// 自定义绘制Cell的接口
@@ -125,6 +127,21 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                 return true;
             }
             return false;
+        }
+        internal static int IsInBorderRound(Cell cell, Point currentPoint)
+        {
+            if (cell != null)
+            {
+                if (cell.Rectangle.X + cell.Width - 2 < currentPoint.X && cell.Rectangle.X + cell.Width + 2 > currentPoint.X && currentPoint.Y > cell.Rectangle.Y && currentPoint.Y < cell.Rectangle.Height + cell.Rectangle.Y)
+                {
+                    return 1;
+                }
+                if (cell.Rectangle.Y + cell.Height - 2 < currentPoint.Y && cell.Rectangle.Y + 2 + cell.Height > currentPoint.Y && cell.Rectangle.X < currentPoint.X && cell.Rectangle.X + cell.Rectangle.Width > currentPoint.X)
+                {
+                    return 2;
+                }
+            }
+            return 0;
         }
 
         /// <summary>
@@ -212,6 +229,10 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                 {
                     graphics.FillRectangle(backBrush, cell.Rectangle);
                 }
+                using (Pen pen = new Pen(cell.GridColor))
+                {
+                    graphics.DrawRectangle(pen, cell.Rectangle);
+                }
                 // 绘制
                 using (Brush brush = new SolidBrush(cell.CellStyle.SelectForeColor))
                 {
@@ -224,6 +245,10 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                 using (Brush backBrush = new SolidBrush(cell.CellStyle.BackColor))
                 {
                     graphics.FillRectangle(backBrush, cell.Rectangle);
+                }
+                using (Pen pen = new Pen(cell.GridColor))
+                {
+                    graphics.DrawRectangle(pen, cell.Rectangle);
                 }
                 using (Brush brush = new SolidBrush(cell.CellStyle.ForeColor))
                 {

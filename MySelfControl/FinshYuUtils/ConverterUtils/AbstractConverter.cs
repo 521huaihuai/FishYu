@@ -18,11 +18,10 @@ using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
-using static System.Resources.ResXFileRef;
 
 namespace FinshYuUtils.ConverterUtils
 {
-    public abstract class AbstractConverter<T> : Converter
+    public abstract class AbstractConverter<T> : System.Resources.ResXFileRef.Converter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context,
                 Type sourceType)

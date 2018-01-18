@@ -34,11 +34,14 @@
             // fishYuDataGridView1
             // 
             this.fishYuDataGridView1.BrushColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(169)))), ((int)(((byte)(255)))));
+            this.fishYuDataGridView1.CellDefaultGridColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(169)))), ((int)(((byte)(255)))));
+            this.fishYuDataGridView1.ColumnCellStyle = new FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews.FishYuCellStyle(FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews.Alignment.MiddleCenter, System.Drawing.Color.White, new System.Drawing.Font("Consolas", 8F), System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(169)))), ((int)(((byte)(255))))), System.Drawing.Color.White);
+            this.fishYuDataGridView1.ColumnGridColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(169)))), ((int)(((byte)(255)))));
             this.fishYuDataGridView1.IsEnableAnimation = true;
             this.fishYuDataGridView1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(22)))), ((int)(((byte)(52)))));
-            this.fishYuDataGridView1.Location = new System.Drawing.Point(91, 12);
+            this.fishYuDataGridView1.Location = new System.Drawing.Point(12, 21);
             this.fishYuDataGridView1.Name = "fishYuDataGridView1";
-            this.fishYuDataGridView1.Size = new System.Drawing.Size(150, 150);
+            this.fishYuDataGridView1.Size = new System.Drawing.Size(618, 228);
             this.fishYuDataGridView1.TabIndex = 0;
             this.fishYuDataGridView1.TitleColumns = null;
             // 

@@ -13,16 +13,17 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Text;
 
 namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
 {
     /// <summary>
-    /// 列的size设置(最终影响单元格)
+    /// 列的size设置(最终影响单元格)(默认100 固定大小)
     /// </summary>
     public enum AutoSizeMode
     {
-        Default, Fill, None
+        Default, Fill
     }
 
     /// <summary>
@@ -150,29 +151,37 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         }
 
         protected int _x;
+
         protected int _y;
 
         public int X
         {
             get { return _x; }
-            set { _x = value; DrawCell.Location.X = _x; }
+            set { _x = value; DrawCell.Location.X = _x; DrawCell.Rectangle.X = _x; }
         }
 
         public int Y
         {
             get { return _y; }
-            set { _y = value; DrawCell.Location.Y = _y; }
+            set
+            {
+                _y = value; DrawCell.Location.Y = _y;
+                DrawCell.Rectangle.Y = _y;
+            }
         }
 
 
-
-        public string Name { get; set; }
+        protected string _name = string.Empty;
+        public string Name { get { return _name; } set { _name = value; DrawCell.Value = value; } }
         // 父ColumnIndex
         public int PColumnIndex;
         // Column排列第几个
         public int Index;
         public int RowIndex;
         public int PRowIndex = 0;
+
+        // 父节点
+        public Column pColumn;
 
         protected List<Cell> _cells;
         /// <summary>
@@ -222,7 +231,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                     foreach (var item in column.ChildColumns)
                     {
                         item.IsVisible = value;
-                   }
+                    }
                 }
                 else
                 {
@@ -234,6 +243,29 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                         }
                     }
                 }
+            }
+        }
+
+        internal void AddColumn(Column item)
+        {
+            item.pColumn = this;
+            if (ChildColumns == null)
+            {
+                ChildColumns = new List<Column>();
+                ChildColumns.Add(item);
+            }
+            else
+            {
+                int ii = ChildColumns.FindIndex(x => x.Index > item.Index);
+                if (ii > 0)
+                {
+                    ChildColumns.Insert(ii, item);
+                }
+                else
+                {
+                    ChildColumns.Add(item);
+                }
+
             }
         }
 
@@ -265,5 +297,34 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         /// </summary>
         [Description("是否该列下的单元格默认启用该列的样式"), Browsable(true), Category("样式")]
         public bool IsCellStyleEnableColumnCellStyle { get; private set; }
+
+
+        [Description("列边框颜色"), Browsable(true), Category("样式")]
+        public Color GridColor
+        {
+            set
+            {
+                DrawCell.GridColor = value;
+                if (ChildColumns != null)
+                {
+                    foreach (var item in ChildColumns)
+                    {
+                        SetColumnGridColor(item, value);
+                    }
+                }
+            }
+        }
+
+        private void SetColumnGridColor(Column item, Color color)
+        {
+            item.DrawCell.GridColor = color;
+            if (item.ChildColumns != null)
+            {
+                foreach (var column in item.ChildColumns)
+                {
+                    SetColumnGridColor(column, color);
+                }
+            }
+        }
     }
 }

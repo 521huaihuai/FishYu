@@ -85,7 +85,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         /// 选中后的颜色
         /// </summary>
         [Description("选中后的颜色"), Browsable(true), Category("样式")]
-        public Color SelectBackColor { get { return _selectBackColor; } set { _foreColor = value; } }
+        public Color SelectBackColor { get { return _selectBackColor; } set { _selectBackColor = value; } }
 
 
         private Color _selectForeColor = AbstractReportView.perferWhite;

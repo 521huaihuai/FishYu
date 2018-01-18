@@ -36,12 +36,25 @@ namespace Test
         private void ReportViewTestForm_Load(object sender, EventArgs e)
         {
             List<Column> columns = new List<Column>();
-            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称", 0, 0, 0));
-            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称1", 1, 0, 0));
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称", 0, 0, 0, 200));
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称1", 1, 0, 0,200));
             columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称2", 2, 0, 0));
             columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称3", 3, 0, 0));
+
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称1-1", 0, 1, 0));
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称1-2", 1, 1, 0));
+
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称2-1", 2, 1, 1, 50));
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称2-2", 3, 1, 1, 50));
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称2-1", 4, 1, 1, 50));
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称2-2", 5, 1, 1, 50));
+
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称1-1", 0, 2, 0, 25));
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称1-2", 1, 2, 0, 25));
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称1-3", 2, 2, 0, 25));
+            columns.Add(fishYuDataGridView1.ColumnFactoryInstance.CreateTitleColumn("名称1-4", 3, 2, 0, 25));
             fishYuDataGridView1.TitleColumns = fishYuDataGridView1.ColumnFactoryInstance.SortColumns(columns);
-            fishYuDataGridView1.InitDataGridView();
+            fishYuDataGridView1.InitDefaultDataGridView();
         }
     }
 }

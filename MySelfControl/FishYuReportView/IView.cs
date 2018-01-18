@@ -20,7 +20,7 @@ namespace FishyuSelfControl.FishYuReportView
     public interface IView
     {
         /// <summary>
-        /// 子类的绘制
+        /// 子类的绘制 ( 不允许初始化对象以及耗时操作 )
         /// </summary>
         /// <param name="g">绘制</param>
         /// <param name="linePen"></param>

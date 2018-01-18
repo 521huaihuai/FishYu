@@ -45,11 +45,11 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews.Co
 
             if (s == null) return base.ConvertFrom(context, culture, value);
 
-            //字符串，如："Jonny,Sun,33" 
-            string[] ps = s.Split(new char[] { char.Parse(",") });
+            ////字符串，如："Jonny,Sun,33" 
+            //string[] ps = s.Split(new char[] { char.Parse(",") });
 
-            if (ps.Length != 3)
-                throw new ArgumentException("Failed to parse Text");
+            //if (ps.Length != 3)
+            //    throw new ArgumentException("Failed to parse Text");
             //解析字符串并实例化对象 
             return base.ConvertFrom(context, culture, value);
         }
@@ -59,9 +59,9 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews.Co
         object value,
         Type destinationType)
         {
-            //将对象转换为字符串，如："Jonny,Sun,33" 
-            if ((destinationType == typeof(string)) && (value is FishYuCellStyle))
-                return ((FishYuCellStyle)value).Alignment + "," + ((FishYuCellStyle)value).BackColor + "," + ((FishYuCellStyle)value).Font.ToString();
+            ////将对象转换为字符串，如："Jonny,Sun,33" 
+            //if ((destinationType == typeof(string)) && (value is FishYuCellStyle))
+            //    return ((FishYuCellStyle)value).Alignment + "," + ((FishYuCellStyle)value).BackColor + "," + ((FishYuCellStyle)value).Font.ToString();
 
             //生成设计时的构造器代码 
             // this.testComponent1.Person = new CSFramework.MyTypeConverter.Person("Jonny", "Sun", 33); 
