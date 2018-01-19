@@ -30,6 +30,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         public static ColumnFactory Instance { get { return _instance; } }
 
 
+
         /// <summary>
         /// 创建一列默认样式, 默认type为文本格式
         /// </summary>
@@ -42,10 +43,10 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         /// <param name="height"></param>
         /// <param name="fishYuCellStyle"></param>
         /// <returns></returns>
-        public Column CreateTitleColumn(string name, int index, int rowIndex = 0, int pIndex = 0, int width = 100, int height = 35, FishYuCellStyle fishYuCellStyle = null)
+        public Column CreateTitleColumn(string name, int index, int rowIndex = 0, int pIndex = 0, int width = 100, int height = 35, FishYuCellStyle fishYuCellStyle = null, CellType cellType = CellType.Text, ICellSelfDefineView icellSelfDefineView = null)
         {
             Column column = new Column();
-            column.Name = name;
+            column.Value = name;
             column.Index = index;
             column.PColumnIndex = pIndex;
             column.RowIndex = rowIndex;
@@ -56,9 +57,34 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             {
                 fishYuCellStyle = FishYuCellStyle.DefaultCellStyle;
             }
+            column.iCellSelfDefineView = icellSelfDefineView;
             column.CellStyle = fishYuCellStyle;
+            column.CellType = cellType;
             return column;
         }
+
+        public Column CreateCellColumn(string value, string cellName, int index, int rowIndex = 0, int pIndex = 0, int width = 100, int height = 35, FishYuCellStyle fishYuCellStyle = null, bool isVerticelColumn = true, CellType cellType = CellType.Text, ICellSelfDefineView icellSelfDefineView = null)
+        {
+            Column column = new Column();
+            column.Value = value;
+            column.Name = cellName;
+            column.Index = index;
+            column.PColumnIndex = pIndex;
+            column.RowIndex = rowIndex;
+            column.PRowIndex = rowIndex - 1;
+            column.Width = width;
+            column.Height = height;
+            column.isVetical = isVerticelColumn;
+            if (fishYuCellStyle == null)
+            {
+                fishYuCellStyle = FishYuCellStyle.DefaultCellStyle;
+            }
+            column.iCellSelfDefineView = icellSelfDefineView;
+            column.CellStyle = fishYuCellStyle;
+            column.CellType = cellType;
+            return column;
+        }
+
 
         public List<Column> SortColumns(List<Column>columns)
         {

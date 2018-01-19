@@ -22,6 +22,30 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
     public partial class FishYuDataGridView : AbstractReportView, IView
     {
 
+        // 当前点击点
+        private Point CurrentPoint;
+        // 是否准备展示拖拽辅助线
+        private bool isReadyShowVHelpLine;
+        private bool isReadyShowHHelpLine;
+        private bool isDrawVHelpLine;
+        private bool isDraging;
+        private bool isDrawHHelpLine;
+        private Column CurrentColumn;
+        // 单元格列
+        private Dictionary<string, Column> _cellColumns = new Dictionary<string, Column>();
+        // 数据具体赋值的接口, 必须实现否则无法展示数据
+        private IDataAdapter dataAdapter = null;
+
+        public void SetAdapter(IDataAdapter dataAdapter)
+        {
+            this.dataAdapter = dataAdapter;
+        }
+
+        #region 属性
+        protected string _noDataMessageRemind = "数据为空!";
+        [Description("数据为空时的提醒信息"), Browsable(true), Category("样式")]
+        public string NoDataMessageRemind { get { return _noDataMessageRemind; } set { _noDataMessageRemind = value; } }
+
         protected FishYuCellStyle _columnCellStyle = new FishYuCellStyle();
         /// <summary>
         /// 列样式(如果有多行列则无效)
@@ -53,6 +77,12 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             }
         }
 
+        /// <summary>
+        /// 是否启用改变单元格的大小
+        /// </summary>
+        [Description("是否启用改变单元格的大小"), Browsable(true), Category("样式")]
+        public bool IsEnableResizeView { get; set; }
+
 
         protected Color _cellGridColor = perferBlue;
         /// <summary>
@@ -83,33 +113,55 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             }
         }
 
+        protected List<Column> _titleColumns = null;
         /// <summary>
         /// 列
         /// </summary>
-        public List<Column> TitleColumns { get; set; }
+        [Browsable(false)]
+        public List<Column> TitleColumns
+        {
+            get { return _titleColumns; }
+            set
+            {
+                _titleColumns = value;
+                if (null != _titleColumns)
+                {
+                    foreach (var item in _titleColumns)
+                    {
+                        GetCellColumn(item);
+                    }
+                }
+            } }
 
-        public Dictionary<int, Dictionary<int, Cell>> Cells = new Dictionary<int, Dictionary<int, Cell>>();
+        private void GetCellColumn(Column item)
+        {
+            if (!string.IsNullOrEmpty(item.Name))
+            {
+                _cellColumns.Add(item.Name, item);
+            }
+            if (null != item.ChildColumns)
+            {
+                foreach (var column in item.ChildColumns)
+                {
+                    GetCellColumn(column);
+                }
+            }
+        }
+        #endregion
+
+        //public Dictionary<int, Dictionary<int, Cell>> Cells = new Dictionary<int, Dictionary<int, Cell>>();
+
+        private Dictionary<string, List<Cell>> rowCells = new Dictionary<string, List<Cell>>();
         /// <summary>
         /// 列工厂
         /// </summary>
         public ColumnFactory ColumnFactoryInstance = ColumnFactory.Instance;
-
-        // 当前点击点
-        private Point CurrentPoint;
-        // 是否准备展示拖拽辅助线
-        private bool isReadyShowVHelpLine;
-        private bool isReadyShowHHelpLine;
-        private bool isDrawVHelpLine;
-        private bool isDraging;
-        private bool isDrawHHelpLine;
-        private Column CurrentColumn;
 
         public FishYuDataGridView()
         {
             InitializeComponent();
             _iView = this;
         }
-
 
         private void FishYuDataGridView_Load(object sender, EventArgs e)
         {
@@ -141,7 +193,6 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             }
         }
 
-
         // 不允许初始化对象以及耗时操作
         public void ChildPaint(Graphics g, Pen pen, Brush brush)
         {
@@ -151,6 +202,19 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                 foreach (var item in TitleColumns)
                 {
                     DrasColumns(g, item);
+                }
+            }
+
+            if (rowCells.Count > 0)
+            {
+                // 这是一列一列的画
+                foreach (var item in rowCells.Keys)
+                {
+                    List<Cell> list = rowCells[item];
+                    foreach (var cell in list)
+                    {
+                        Cell.DrawCell(g, cell);
+                    }
                 }
             }
 
@@ -168,14 +232,15 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         {
             if (item.IsVisible)
             {
-                if (item.CellType == CellType.Text)
-                {
-                    Cell.DrawCell(g, item.DrawCell);
-                }
-                else if (item.CellType == CellType.CheckBox)
-                {
-                    // 如果是CheckBox 则绘制CheckBox,可以进行勾选
-                }
+                Cell.DrawCell(g, item.DrawCell);
+                //if (item.CellType == CellType.Text)
+                //{
+
+                //}
+                //else if (item.CellType == CellType.CheckBox)
+                //{
+                //    // 如果是CheckBox 则绘制CheckBox,可以进行勾选
+                //}
                 if (null != item.ChildColumns)
                 {
                     foreach (var column in item.ChildColumns)
@@ -186,7 +251,55 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             }
         }
 
+        public void SetList<T>(List<T> datas)
+        {
+            if (dataAdapter != null)
+            {
+                // 清空所有数据
+                ClearAllInfos();
+                if (datas != null)
+                {
+                    foreach (var item in _cellColumns.Keys)
+                    {
+                        if (!rowCells.ContainsKey(item))
+                        {
+                            rowCells.Add(item, new List<Cell>());
+                        }
+                    }
+                    for (int i = 0; i < datas.Count; i++)
+                    {
+                        Dictionary<string, Cell> cells = new Dictionary<string, Cell>();
+                        foreach (var item in rowCells.Keys)
+                        {
+                            Cell cell = new Cell();
+                            cell.Rectangle = new Rectangle(_cellColumns[item].DrawCell.Rectangle.X, _cellColumns[item].DrawCell.Rectangle.Y + i * _cellColumns[item].DrawCell.Height, _cellColumns[item].DrawCell.Width, _cellColumns[item].DrawCell.Height);
+                            cell.CellStyle = _cellColumns[item].DrawCell.CellStyle;
+                            cell.ColumnIndex = _cellColumns[item].DrawCell.ColumnIndex;
+                            cell.GridColor = _cellColumns[item].DrawCell.GridColor;
+                            cell.Index = _cellColumns[item].DrawCell.Index;
+                            cell.IsVisible = _cellColumns[item].DrawCell.IsVisible;
+                            cell.RowIndex = _cellColumns[item].DrawCell.RowIndex;
+                            cell.Type = _cellColumns[item].DrawCell.Type;
 
+                            rowCells[item].Add(cell);
+                            cells.Add(item, rowCells[item][i]);
+                        }
+                        dataAdapter.SetData(datas[i], cells);
+                    }
+                }
+                else
+                {
+                    SimpleMessageBoxs.SimpleMessageBox.ShowMessageBox(_noDataMessageRemind);
+                }
+
+            }
+        }
+
+        //  清空所有数据
+        private void ClearAllInfos()
+        {
+            rowCells.Clear();
+        }
 
 
         #region MouseEvent
@@ -286,8 +399,8 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                 // 改变Cells的宽度或高度
                 ChangeCellsWH();
             }
-  
-            
+
+
             isDrawVHelpLine = false;
             isDrawHHelpLine = false;
             isDraging = false;
@@ -320,17 +433,42 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             {
                 if (CurrentColumn.pColumn != null && CurrentColumn.pColumn.ChildColumns != null && CurrentColumn.pColumn.ChildColumns.Count > 1)
                 {
+                    int fillCount = 0;
+                    int defaultWidth = 0;
                     foreach (var item in CurrentColumn.pColumn.ChildColumns)
                     {
                         // 如果是固定宽高, 则不变
                         if (item.AutoSizeMode == DataGridViews.AutoSizeMode.Default)
                         {
+                            defaultWidth += item.Width;
                             //子节点也不需要改变
                             continue;
                         }
                         // 如果是填充, 则先确定改变的以及固定的在确定填充的
                         if (item.AutoSizeMode == DataGridViews.AutoSizeMode.Fill)
                         {
+                            fillCount++;
+                        }
+                    }
+                    int perWidth = 0;
+                    if (fillCount > 0)
+                    {
+                        perWidth = (CurrentColumn.pColumn.Width - defaultWidth) / fillCount;
+                    }
+                    int startX = CurrentColumn.pColumn.ChildColumns[0].X;
+                    foreach (var item in CurrentColumn.pColumn.ChildColumns)
+                    {
+
+                        item.X = startX;
+                        if (item.AutoSizeMode == DataGridViews.AutoSizeMode.Default)
+                        {
+                            //子节点也不需要改变
+                            startX += item.Width;
+                        }
+                        // 如果是填充, 则先确定改变的以及固定的在确定填充的
+                        if (item.AutoSizeMode == DataGridViews.AutoSizeMode.Fill)
+                        {
+                            startX += perWidth;
 
                         }
                     }
@@ -378,7 +516,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                 this.Invalidate();
                 return;
             }
-            if (null != TitleColumns)
+            if (IsEnableResizeView && null != TitleColumns)
             {
                 int ii = 0;
                 foreach (var item in TitleColumns)

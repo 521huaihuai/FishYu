@@ -105,7 +105,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         /// </summary>
         public List<Cell> AllRoundCells { get { return _roundCellList; } set { _roundCellList = value; } }
 
-        public Color GridColor;
+        public Color GridColor = Color.Silver;
 
 
         /// <summary>

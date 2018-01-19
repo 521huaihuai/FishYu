@@ -57,6 +57,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
             {
                 _cellType = value;
                 DrawCell.Type = _cellType;
+                DrawCell.iCellSelfDefineView = iCellSelfDefineView;
                 if (Cells != null)
                 {
                     if (IsBottomColumn())
@@ -64,6 +65,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
                         foreach (var item in Cells)
                         {
                             item.Type = _cellType;
+                            item.iCellSelfDefineView = iCellSelfDefineView;
                         }
                     }
                 }
@@ -172,7 +174,10 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
 
 
         protected string _name = string.Empty;
-        public string Name { get { return _name; } set { _name = value; DrawCell.Value = value; } }
+        public string Name { get { return _name; } set { _name = value;} }
+
+        protected string _value = string.Empty;
+        public string Value { get { return _value; } set { _value = value; DrawCell.Value = value; } }
         // 父ColumnIndex
         public int PColumnIndex;
         // Column排列第几个
@@ -270,6 +275,11 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
         }
 
         protected bool _isChangeSize = false;
+
+        // 自定义Cell的绘制
+        public ICellSelfDefineView iCellSelfDefineView;
+        internal bool isVetical = true;;
+
         /// <summary>
         /// 是否拖动改变大小
         /// </summary>

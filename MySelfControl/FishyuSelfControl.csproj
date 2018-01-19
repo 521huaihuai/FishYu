@@ -150,6 +150,7 @@
       <DependentUpon>FishYuDataGridView.cs</DependentUpon>
     </Compile>
     <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\ICellSelfDefineView.cs" />
+    <Compile Include="FishYuReportView\AutoSortReportView\DataGridViews\IDataAdapter.cs" />
     <Compile Include="FishYuReportView\CommonView\LegendView\SimpleLegendView.cs">
       <SubType>UserControl</SubType>
     </Compile>
