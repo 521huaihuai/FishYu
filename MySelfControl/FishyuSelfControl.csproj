@@ -89,6 +89,14 @@
     <Compile Include="CommonPictureBoxs\ClosePictureBoxs\SimpleClosePictureBox.Designer.cs">
       <DependentUpon>SimpleClosePictureBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommonPictureBoxs\EnlargePopuPicture\EnlargeImageImp.cs" />
+    <Compile Include="CommonPictureBoxs\EnlargePopuPicture\EnlargeImagePopuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\EnlargePopuPicture\EnlargeImagePopuForm.Designer.cs">
+      <DependentUpon>EnlargeImagePopuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPictureBoxs\EnlargePopuPicture\IEnlargPicture.cs" />
     <Compile Include="CommonPictureBoxs\MaxPictureBoxs\AnimationMaxPictureBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPictureBoxs\ClosePictureBoxs\SimpleClosePictureBox.resx">
       <DependentUpon>SimpleClosePictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonPictureBoxs\EnlargePopuPicture\EnlargeImagePopuForm.resx">
+      <DependentUpon>EnlargeImagePopuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPictureBoxs\MaxPictureBoxs\AnimationMaxPictureBox.resx">
       <DependentUpon>AnimationMaxPictureBox.cs</DependentUpon>

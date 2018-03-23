@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DemoTest\EnLargeViewTest\EnLargeTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DemoTest\EnLargeViewTest\EnLargeTest.Designer.cs">
+      <DependentUpon>EnLargeTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,9 @@
     <Compile Include="Self.Designer.cs">
       <DependentUpon>Self.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DemoTest\EnLargeViewTest\EnLargeTest.resx">
+      <DependentUpon>EnLargeTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +94,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ReportViewTestForm.resx">
       <DependentUpon>ReportViewTestForm.cs</DependentUpon>
@@ -110,6 +120,9 @@
       <Project>{142f6a74-b1d1-4cff-8805-e9f2fac9d440}</Project>
       <Name>FishyuSelfControl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\242b8a23ef0885da1b097b3101ef918c.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

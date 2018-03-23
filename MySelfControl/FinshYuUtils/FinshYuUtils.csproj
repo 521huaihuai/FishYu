@@ -61,6 +61,7 @@
     <Compile Include="ExcelUtils\ExcelFactory.cs" />
     <Compile Include="ExcelUtils\ExcelHelper.cs" />
     <Compile Include="ExcelUtils\ReNameRepeatFileName.cs" />
+    <Compile Include="ImageUtils\ImageUtil.cs" />
     <Compile Include="ImageUtils\StaticImageLoad.cs" />
     <Compile Include="JumpViewUtils\IJumpViewInterface.cs" />
     <Compile Include="LogBase.cs" />

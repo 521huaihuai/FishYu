@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Test.DemoTest.EnLargeViewTest;
 using WindowsApplication15;
 
 namespace Test
@@ -18,7 +19,7 @@ namespace Test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ReportViewTestForm());
+            Application.Run(new EnLargeTest());
         }
     }
 }

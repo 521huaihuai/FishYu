@@ -278,7 +278,7 @@ namespace FishyuSelfControl.FishYuReportView.AutoSortReportView.DataGridViews
 
         // 自定义Cell的绘制
         public ICellSelfDefineView iCellSelfDefineView;
-        internal bool isVetical = true;;
+        internal bool isVetical = true;
 
         /// <summary>
         /// 是否拖动改变大小
